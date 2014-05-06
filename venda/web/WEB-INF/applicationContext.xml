@@ -11,7 +11,7 @@
         <intercept-url pattern="/faces/bairro/**" access="ROLE_MASTER" />
         <form-login 
             login-page="/login/acesso.jsf" 
-            authentication-failure-url="/faces/loginInicio.xhtml?erro=true"
+            authentication-failure-url="/login/acesso.jsf?erro=true"
             always-use-default-target = "true" 
             default-target-url = "/faces/publico/index.xhtml"/>
     </http>
