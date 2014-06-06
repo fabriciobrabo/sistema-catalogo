@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "representante")
 @XmlRootElement
+@SequenceGenerator(name = "venda_sequence_representante", sequenceName = "venda_sequence_representante")
 @NamedQueries({
     @NamedQuery(name = "Representante.findAll", query = "SELECT r FROM Representante r"),
     @NamedQuery(name = "Representante.findById", query = "SELECT r FROM Representante r WHERE r.id = :id"),
@@ -44,41 +46,43 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Representante implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_representante")
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
+    
     @Column(name = "nome")
     private String nome;
-    @Basic(optional = false)
+    
     @Column(name = "sobrenome")
     private String sobrenome;
-    @Basic(optional = false)
+    
     @Column(name = "cpf")
     private String cpf;
-    @Basic(optional = false)
+    
     @Column(name = "rg")
     private String rg;
-    @Basic(optional = false)
+    
     @Column(name = "cep")
     private String cep;
-    @Basic(optional = false)
+    
     @Column(name = "endereco")
     private String endereco;
-    @Basic(optional = false)
+    
     @Column(name = "bairro")
     private String bairro;
-    @Basic(optional = false)
+    
     @Column(name = "cidade")
     private String cidade;
-    @Basic(optional = false)
+    
     @Column(name = "estado")
     private String estado;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "representante")
     private List<RepresentanteMonitor> representanteMonitorList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "representante")
     private List<RepresentanteCatalogo> representanteCatalogoList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "representante")
     private List<ParceiroRepresentante> parceiroRepresentanteList;
 

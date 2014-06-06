@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,26 +30,30 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "catalogo")
 @XmlRootElement
+@SequenceGenerator(name = "venda_sequence_catalogo", sequenceName = "venda_sequence_catalogo")
 @NamedQueries({
     @NamedQuery(name = "Catalogo.findAll", query = "SELECT c FROM Catalogo c"),
     @NamedQuery(name = "Catalogo.findById", query = "SELECT c FROM Catalogo c WHERE c.id = :id"),
     @NamedQuery(name = "Catalogo.findByNome", query = "SELECT c FROM Catalogo c WHERE c.nome = :nome")})
 public class Catalogo implements Serializable {
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_catalgo")
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
+    
     @Column(name = "nome")
     private String nome;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo")
     private List<MonitorCatalogo> monitorCatalogoList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo")
     private List<ParceiroCatalogo> parceiroCatalogoList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo")
     private List<RepresentanteCatalogo> representanteCatalogoList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo")
     private List<RevendedorCatalogo> revendedorCatalogoList;
 

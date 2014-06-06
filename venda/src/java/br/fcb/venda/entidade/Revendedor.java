@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "revendedor")
 @XmlRootElement
+@SequenceGenerator(name = "venda_sequence_revendedor", sequenceName = "venda_sequence_revendedor")
 @NamedQueries({
     @NamedQuery(name = "Revendedor.findAll", query = "SELECT r FROM Revendedor r"),
     @NamedQuery(name = "Revendedor.findById", query = "SELECT r FROM Revendedor r WHERE r.id = :id"),
@@ -42,41 +44,42 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Revendedor.findByCidade", query = "SELECT r FROM Revendedor r WHERE r.cidade = :cidade"),
     @NamedQuery(name = "Revendedor.findByEstado", query = "SELECT r FROM Revendedor r WHERE r.estado = :estado")})
 public class Revendedor implements Serializable {
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_revendedor")
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
+    
     @Column(name = "nome")
     private String nome;
-    @Basic(optional = false)
+    
     @Column(name = "sobrenome")
     private String sobrenome;
-    @Basic(optional = false)
+    
     @Column(name = "cpf")
     private String cpf;
-    @Basic(optional = false)
+    
     @Column(name = "rg")
     private String rg;
-    @Basic(optional = false)
+    
     @Column(name = "cep")
     private String cep;
-    @Basic(optional = false)
+    
     @Column(name = "endereco")
     private String endereco;
-    @Basic(optional = false)
+    
     @Column(name = "bairro")
     private String bairro;
-    @Basic(optional = false)
+    
     @Column(name = "cidade")
     private String cidade;
-    @Basic(optional = false)
+    
     @Column(name = "estado")
     private String estado;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "revendedor")
     private List<MonitorRevendedor> monitorRevendedorList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "revendedor")
     private List<RevendedorCatalogo> revendedorCatalogoList;
 

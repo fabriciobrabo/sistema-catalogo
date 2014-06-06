@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "parceiro")
 @XmlRootElement
+@SequenceGenerator(name = "venda_sequence_parceiro", sequenceName = "venda_sequence_parceiro")
 @NamedQueries({
     @NamedQuery(name = "Parceiro.findAll", query = "SELECT p FROM Parceiro p"),
     @NamedQuery(name = "Parceiro.findById", query = "SELECT p FROM Parceiro p WHERE p.id = :id"),
@@ -44,39 +46,40 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Parceiro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_parceiro")
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
+    
     @Column(name = "nome")
     private String nome;
-    @Basic(optional = false)
+    
     @Column(name = "sobrenome")
     private String sobrenome;
-    @Basic(optional = false)
+    
     @Column(name = "cpf")
     private String cpf;
-    @Basic(optional = false)
+    
     @Column(name = "rg")
     private String rg;
-    @Basic(optional = false)
+    
     @Column(name = "cep")
     private String cep;
-    @Basic(optional = false)
+    
     @Column(name = "endereco")
     private String endereco;
-    @Basic(optional = false)
+    
     @Column(name = "bairro")
     private String bairro;
-    @Basic(optional = false)
+    
     @Column(name = "cidade")
     private String cidade;
-    @Basic(optional = false)
+    
     @Column(name = "estado")
     private String estado;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parceiro")
     private List<ParceiroCatalogo> parceiroCatalogoList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parceiro")
     private List<ParceiroRepresentante> parceiroRepresentanteList;
 

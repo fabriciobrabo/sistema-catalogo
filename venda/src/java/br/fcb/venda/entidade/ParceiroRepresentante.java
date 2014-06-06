@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,19 +28,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "parceiro_representante")
 @XmlRootElement
+@SequenceGenerator(name = "venda_sequence_parceiro_representante", sequenceName = "venda_sequence_parceiro_representante")
 @NamedQueries({
     @NamedQuery(name = "ParceiroRepresentante.findAll", query = "SELECT p FROM ParceiroRepresentante p"),
     @NamedQuery(name = "ParceiroRepresentante.findById", query = "SELECT p FROM ParceiroRepresentante p WHERE p.id = :id")})
 public class ParceiroRepresentante implements Serializable {
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_parceiro_representante")
     @Column(name = "id")
     private Integer id;
+    
     @JoinColumn(name = "representante", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Representante representante;
+    
     @JoinColumn(name = "parceiro", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Parceiro parceiro;
