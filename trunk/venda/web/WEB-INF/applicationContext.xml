@@ -13,7 +13,7 @@
             login-page="/login/acesso.jsf" 
             authentication-failure-url="/login/acesso.jsf?erro=true"
             always-use-default-target = "true" 
-            default-target-url = "/faces/publico/index.xhtml"/>
+            default-target-url = "/sistema/inicio.jsf"/>
     </http>
     
     <authentication-manager>
