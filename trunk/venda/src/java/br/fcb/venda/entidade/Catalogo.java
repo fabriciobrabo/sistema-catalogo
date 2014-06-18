@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Catalogo.findById", query = "SELECT c FROM Catalogo c WHERE c.id = :id"),
     @NamedQuery(name = "Catalogo.findByNome", query = "SELECT c FROM Catalogo c WHERE c.nome = :nome")})
 public class Catalogo implements Serializable {
-//    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_catalgo")
     @Column(name = "id")
@@ -45,16 +45,16 @@ public class Catalogo implements Serializable {
     @Column(name = "nome")
     private String nome;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo", orphanRemoval = true)
     private List<MonitorCatalogo> monitorCatalogoList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo", orphanRemoval = true)
     private List<ParceiroCatalogo> parceiroCatalogoList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo", orphanRemoval = true)
     private List<RepresentanteCatalogo> representanteCatalogoList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo", orphanRemoval = true)
     private List<RevendedorCatalogo> revendedorCatalogoList;
 
     public Catalogo() {

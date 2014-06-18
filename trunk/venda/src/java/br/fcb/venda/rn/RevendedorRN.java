@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.fcb.venda.rn;
 
 import br.fcb.venda.dao.GenericDAO;
@@ -14,15 +13,15 @@ import java.util.List;
  *
  * @author ufrastic
  */
-public class RevendedorRN implements InterfaceRN<Revendedor>{
+public class RevendedorRN implements InterfaceRN<Revendedor> {
 
     private GenericDAO<Revendedor> dao = new GenericDAO<Revendedor>();
-    
+
     @Override
     public Revendedor obter(Object id) {
         if (id == null) {
             return null;
-        }else{
+        } else {
             return dao.obter(Revendedor.class, id);
         }
     }
@@ -33,20 +32,15 @@ public class RevendedorRN implements InterfaceRN<Revendedor>{
     }
 
     @Override
-    public boolean criar(Revendedor o) {
+    public boolean salvar(Revendedor o) {
         if (o.getNome().equals("")) {
             return false;
-        }else{
-            return dao.criar(o);
-        }
-    }
-
-    @Override
-    public boolean atualizar(Revendedor o) {
-           if (o.getNome().equals("")) {
-            return false;
-        }else{
-            return dao.atualizar(o);
+        } else {
+            if (o.getId() == null) {
+                return dao.criar(o);
+            } else {
+                return dao.atualizar(o);
+            }
         }
     }
 
@@ -54,5 +48,5 @@ public class RevendedorRN implements InterfaceRN<Revendedor>{
     public boolean remover(Revendedor o) {
         return dao.excluir(o);
     }
-    
+
 }

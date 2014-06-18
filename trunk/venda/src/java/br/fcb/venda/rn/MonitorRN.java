@@ -32,20 +32,15 @@ public class MonitorRN implements InterfaceRN<Monitor> {
     }
 
     @Override
-    public boolean criar(Monitor o) {
+    public boolean salvar(Monitor o) {
         if (o.getNome().equals("")) {
             return false;
         } else {
+            if (o.getId() == null) {
             return dao.criar(o);
-        }
-    }
-
-    @Override
-    public boolean atualizar(Monitor o) {
-        if (o.getNome().equals("")) {
-            return false;
-        } else {
-            return dao.atualizar(o);
+            }else{
+                return dao.atualizar(o);
+            }
         }
     }
 
