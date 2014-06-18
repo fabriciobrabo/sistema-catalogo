@@ -5,35 +5,39 @@
  */
 package br.fcb.venda.rn;
 
-import br.fcb.venda.dao.GenericDAO;
-import br.fcb.venda.entidade.Representante;
+import br.fcb.venda.dao.UsuarioDAO;
+import br.fcb.venda.entidade.Usuario;
 import java.util.List;
 
 /**
  *
  * @author ufrastic
  */
-public class RepresentanteRN implements InterfaceRN<Representante> {
+public class UsuarioRN implements InterfaceRN<Usuario> {
 
-    private GenericDAO<Representante> dao = new GenericDAO<Representante>();
+    private UsuarioDAO dao = new UsuarioDAO();
+
+    public Usuario obter(String acesso) {
+        return dao.obter(acesso);
+    }
 
     @Override
-    public Representante obter(Object id) {
+    public Usuario obter(Object id) {
         if (id == null) {
             return null;
         } else {
-            return dao.obter(Representante.class, id);
+            return dao.obter(Usuario.class, id);
         }
     }
 
     @Override
-    public List<Representante> obterTodos() {
-        return dao.obterTodos(Representante.class);
+    public List<Usuario> obterTodos() {
+        return dao.obterTodos(Usuario.class);
     }
 
     @Override
-    public boolean salvar(Representante o) {
-        if (o.getNome().equals("")) {
+    public boolean salvar(Usuario o) {
+        if (o.getEmail().equals("") || o.getUsername().equals("") || o.getSenha().equals("")) {
             return false;
         } else {
             if (o.getId() == null) {
@@ -45,8 +49,7 @@ public class RepresentanteRN implements InterfaceRN<Representante> {
     }
 
     @Override
-    public boolean remover(Representante o) {
+    public boolean remover(Usuario o) {
         return dao.excluir(o);
     }
-
 }

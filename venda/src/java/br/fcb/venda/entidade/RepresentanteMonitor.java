@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "RepresentanteMonitor.findAll", query = "SELECT r FROM RepresentanteMonitor r"),
     @NamedQuery(name = "RepresentanteMonitor.findById", query = "SELECT r FROM RepresentanteMonitor r WHERE r.id = :id")})
 public class RepresentanteMonitor implements Serializable {
-//    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_representante_monitor")
     @Column(name = "id")

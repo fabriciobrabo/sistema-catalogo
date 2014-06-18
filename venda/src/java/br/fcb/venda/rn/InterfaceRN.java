@@ -16,7 +16,6 @@ public interface InterfaceRN<T> {
     
     public T obter(Object id);
     public List<T> obterTodos();
-    public boolean criar(T o);
-    public boolean atualizar(T o);
+    public boolean salvar(T o);
     public boolean remover(T o);
 }

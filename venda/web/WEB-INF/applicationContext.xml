@@ -25,7 +25,7 @@
     
     <beans:bean 
         id="myUserDetailsService"
-        class="spring.Login">
+        class="br.fcb.venda.spring.Login">
     </beans:bean>
     
     <beans:bean 

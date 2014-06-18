@@ -6,6 +6,7 @@
 package br.fcb.venda.dao;
 
 import java.util.List;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -101,6 +102,50 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
             }
             return resposta;
         }
+    }
+    
+    public boolean iniciarTransacao() {
+        try {
+            if (em.getTransaction().isActive()) {
+                return true;
+            }
+            em.getTransaction().begin();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean confirmarTransacao() {
+        try {
+            em.getTransaction().commit();
+            return true;
+        } catch (EntityExistsException e) {
+            return false;
+        }
+    }
+
+    public boolean desfazerTransacao() {
+        try {
+            em.getTransaction().rollback();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    /**
+     * @return the entityManager
+     */
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    /**
+     * @param entityManager the entityManager to set
+     */
+    protected void setEntityManager(EntityManager entityManager) {
+        this.em = entityManager;
     }
 
 }

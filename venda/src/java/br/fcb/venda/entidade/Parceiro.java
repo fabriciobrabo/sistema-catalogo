@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.fcb.venda.entidade;
 
 import java.io.Serializable;
@@ -15,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,43 +45,46 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Parceiro.findByCidade", query = "SELECT p FROM Parceiro p WHERE p.cidade = :cidade"),
     @NamedQuery(name = "Parceiro.findByEstado", query = "SELECT p FROM Parceiro p WHERE p.estado = :estado")})
 public class Parceiro implements Serializable {
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
+    @ManyToOne
+    private Usuario usuario;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_parceiro")
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "nome")
     private String nome;
-    
+
     @Column(name = "sobrenome")
     private String sobrenome;
-    
+
     @Column(name = "cpf")
     private String cpf;
-    
+
     @Column(name = "rg")
     private String rg;
-    
+
     @Column(name = "cep")
     private String cep;
-    
+
     @Column(name = "endereco")
     private String endereco;
-    
+
     @Column(name = "bairro")
     private String bairro;
-    
+
     @Column(name = "cidade")
     private String cidade;
-    
+
     @Column(name = "estado")
     private String estado;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parceiro")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parceiro", orphanRemoval = true)
     private List<ParceiroCatalogo> parceiroCatalogoList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parceiro")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parceiro", orphanRemoval = true)
     private List<ParceiroRepresentante> parceiroRepresentanteList;
 
     public Parceiro() {
@@ -183,6 +187,14 @@ public class Parceiro implements Serializable {
         this.estado = estado;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @XmlTransient
     public List<ParceiroCatalogo> getParceiroCatalogoList() {
         return parceiroCatalogoList;
@@ -225,5 +237,5 @@ public class Parceiro implements Serializable {
     public String toString() {
         return "br.fcb.venda.entidade.Parceiro[ id=" + id + " ]";
     }
-    
+
 }

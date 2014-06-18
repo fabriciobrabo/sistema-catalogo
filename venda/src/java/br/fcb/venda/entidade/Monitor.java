@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.fcb.venda.entidade;
 
 import java.io.Serializable;
@@ -15,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,46 +45,49 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Monitor.findByCidade", query = "SELECT m FROM Monitor m WHERE m.cidade = :cidade"),
     @NamedQuery(name = "Monitor.findByEstado", query = "SELECT m FROM Monitor m WHERE m.estado = :estado")})
 public class Monitor implements Serializable {
-//    private static final long serialVersionUID = 1L;
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
+    @ManyToOne
+    private Usuario usuario;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_monitor")
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "nome")
     private String nome;
-    
+
     @Column(name = "sobrenome")
     private String sobrenome;
-    
+
     @Column(name = "cpf")
     private String cpf;
-    
+
     @Column(name = "rg")
     private String rg;
-    
+
     @Column(name = "cep")
     private String cep;
-    
+
     @Column(name = "endereco")
     private String endereco;
-    
+
     @Column(name = "bairro")
     private String bairro;
-    
+
     @Column(name = "cidade")
     private String cidade;
-    
+
     @Column(name = "estado")
     private String estado;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "monitor")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "monitor", orphanRemoval = true)
     private List<RepresentanteMonitor> representanteMonitorList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "monitor")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "monitor", orphanRemoval = true)
     private List<MonitorCatalogo> monitorCatalogoList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "monitor")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "monitor", orphanRemoval = true)
     private List<MonitorRevendedor> monitorRevendedorList;
 
     public Monitor() {
@@ -186,6 +190,14 @@ public class Monitor implements Serializable {
         this.estado = estado;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @XmlTransient
     public List<RepresentanteMonitor> getRepresentanteMonitorList() {
         return representanteMonitorList;
@@ -237,5 +249,5 @@ public class Monitor implements Serializable {
     public String toString() {
         return "br.fcb.venda.entidade.Monitor[ id=" + id + " ]";
     }
-    
+
 }

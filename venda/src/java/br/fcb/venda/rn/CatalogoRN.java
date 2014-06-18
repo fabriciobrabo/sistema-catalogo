@@ -32,20 +32,15 @@ public class CatalogoRN implements InterfaceRN<Catalogo> {
     }
 
     @Override
-    public boolean criar(Catalogo o) {
+    public boolean salvar(Catalogo o) {
         if (o.getNome().equals("") || o.getNome() == null) {
             return false;
         } else {
+            if (o.getId() == null) {
             return dao.criar(o);
-        }
-    }
-
-    @Override
-    public boolean atualizar(Catalogo o) {
-        if (o.getNome().equals("")|| o.getNome() == null) {
-            return false;
-        }else{
-            return dao.atualizar(o);
+            }else{
+                return dao.atualizar(o);
+            }
         }
     }
 
