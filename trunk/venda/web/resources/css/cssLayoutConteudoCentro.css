@@ -1,5 +1,9 @@
+#divConteudoCentro{
+    position: relative; 
+    margin: 0px 0px 0px 550px
+}
 
-#top {
+/*#top {
     position: relative;
     background-color: #036fab;
     color: white;
@@ -58,4 +62,4 @@
   text-decoration : underline;
 }
 
-
+*/

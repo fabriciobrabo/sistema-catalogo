@@ -8,18 +8,18 @@
 	http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 	 
     <http auto-config="true">
-        <intercept-url pattern="/faces/bairro/**" access="ROLE_MASTER" />
+        <intercept-url pattern="/sistema/inicio.xhtml" access="ROLE_MASTER" />
         <form-login 
-            login-page="/login/acesso.jsf" 
-            authentication-failure-url="/login/acesso.jsf?erro=true"
+            login-page="/login/acesso.xhtml" 
+            authentication-failure-url="/login/acesso.xhtml?erro=true"
             always-use-default-target = "true" 
-            default-target-url = "/sistema/inicio.jsf"/>
+            default-target-url = "/sistema/inicio.xhtml"/>
     </http>
     
     <authentication-manager>
         <authentication-provider 
             user-service-ref ='myUserDetailsService'>
-            <password-encoder ref="passwordEncoder"/>
+            <!--<password-encoder ref="passwordEncoder"/>-->
         </authentication-provider>
     </authentication-manager>
     

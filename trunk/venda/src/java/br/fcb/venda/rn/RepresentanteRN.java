@@ -49,4 +49,8 @@ public class RepresentanteRN implements InterfaceRN<Representante> {
         return dao.excluir(o);
     }
 
+    public List<Representante> obterTodosOrdenado() {
+        return dao.obterTodosOrdenado(Representante.class, "nome");
+    }
+
 }

@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Catalogo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_catalgo")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_catalogo")
     @Column(name = "id")
     private Integer id;
     

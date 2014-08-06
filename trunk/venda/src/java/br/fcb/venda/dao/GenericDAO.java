@@ -103,7 +103,24 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
             return resposta;
         }
     }
-    
+
+    public List<T> obterTodosOrdenado(Class<T> classe, String atributo) {
+        List<T> resposta = null;
+        try {
+            em.getTransaction().begin();
+            String query = "SELECT c FROM " + classe.getSimpleName() + " c ORDER BY c." + atributo;
+            Query q = em.createQuery(query);
+            resposta = (List<T>) q.getResultList();
+            em.getTransaction().commit();
+            return resposta;
+        } catch (Exception e) {
+            if (em.isOpen()) {
+                em.getTransaction().rollback();
+            }
+            return resposta;
+        }
+    }
+
     public boolean iniciarTransacao() {
         try {
             if (em.getTransaction().isActive()) {
@@ -133,7 +150,7 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
             return false;
         }
     }
-    
+
     /**
      * @return the entityManager
      */
