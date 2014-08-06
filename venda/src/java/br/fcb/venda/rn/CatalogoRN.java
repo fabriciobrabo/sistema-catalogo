@@ -49,4 +49,7 @@ public class CatalogoRN implements InterfaceRN<Catalogo> {
         return dao.excluir(o);
     }
 
+    public List<Catalogo> obterTodosOrdenado() {
+        return dao.obterTodosOrdenado(Catalogo.class, "nome");
+    }
 }

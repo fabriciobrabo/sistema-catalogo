@@ -17,8 +17,8 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
     public Usuario obter(String acesso) {
         String query = "SELECT u FROM Usuario u WHERE u.email = :acesso OR "
-                + "u.email_alternativo = acesso OR "
-                + "u.username = acesso";
+                + "u.emailAlternativo = :acesso OR "
+                + "u.username = :acesso";
         Usuario resultado;
         try {
             iniciarTransacao();

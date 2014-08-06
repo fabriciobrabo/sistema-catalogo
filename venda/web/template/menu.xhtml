@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <h:form id="menuPrincipal">
+            <p:tieredMenu>
+                <p:submenu label="Cadastros">
+                    <p:submenu label="Cadastrar Colaborador" icon="ui-icon-contact">
+                        <p:menuitem 
+                            value="Cadastrar Representante" 
+                            ajax="false"
+                            url="/sistema/colaboradores/representante/cadastrar.xhtml" />
+                        <p:menuitem 
+                            value="Cadastrar Monitor" 
+                            ajax="false"
+                            url="/sistema/inicio.xhtml" />
+                        <p:menuitem 
+                            value="Cadastrar Revendedor" 
+                            ajax="false"
+                            url="/sistema/inicio.xhtml" />
+                    </p:submenu>
+                    <p:menuitem 
+                        value="Cadastrar Catálogo" 
+                        ajax="false" 
+                        url="/sistema/catalogo/cadastrar.xhtml" />
+                    <p:menuitem 
+                        value="Cadastrar Usuário" 
+                        ajax="false"
+                        url="/sistema/inicio.xhtml" />
+                </p:submenu>
+            </p:tieredMenu>
+        </h:form>
+    </h:body>
+</html>
+

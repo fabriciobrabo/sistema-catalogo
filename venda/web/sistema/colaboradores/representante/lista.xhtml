@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template/templatePadrao.xhtml">
+        <ui:define name="conteudoCentro">
+            <p:panel header="Lista de Representantes" style="text-align: center">
+                <p:dataTable 
+                    id="dtListaRepresentantes"
+                    value="#{representanteBean.listaRepresentantes}"
+                    var="dtRepresentante"
+                    emptyMessage="Sem dados a serem exibidos.">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{dtRepresentante.nome}"/>
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <p:commandButton 
+                            icon="ui-icon-wrench"
+                            title="Editar"
+                            ajax="false"
+                            action="#{representanteBean.editar}">
+                            <f:setPropertyActionListener
+                                target="#{representanteBean.representante}"
+                                value="#{dtRepresentante}"/>
+                        </p:commandButton>
+                        <p:commandButton 
+                            icon="ui-icon-closethick"
+                            title="Editar"
+                            action="#{representanteBean.excluir}"
+                            update="dtListaRepresentantes">
+                            <p:confirm header="Confirmação" message="Você tem certeza que deseja excluir?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener
+                                target="#{representanteBean.representante}"
+                                value="#{dtRepresentante}"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>
+

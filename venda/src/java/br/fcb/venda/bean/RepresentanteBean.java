@@ -5,8 +5,8 @@
  */
 package br.fcb.venda.bean;
 
-import br.fcb.venda.entidade.Catalogo;
-import br.fcb.venda.rn.CatalogoRN;
+import br.fcb.venda.entidade.Representante;
+import br.fcb.venda.rn.RepresentanteRN;
 import br.fcb.venda.utilitarios.BeanMessageUtil;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -18,35 +18,35 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class CatalogoBean {
+public class RepresentanteBean {
 
-    private Catalogo catalogo = new Catalogo();
-    private final CatalogoRN rn_catalogo = new CatalogoRN();
-    private List<Catalogo> listaCatalogos;
+    private Representante representante = new Representante();
+    private final RepresentanteRN rn_representante = new RepresentanteRN();
+    private List<Representante> listaRepresentantes;
 
-    public Catalogo getCatalogo() {
-        return catalogo;
+    public Representante getRepresentante() {
+        return representante;
     }
 
-    public void setCatalogo(Catalogo catalogo) {
-        this.catalogo = catalogo;
+    public void setRepresentante(Representante representante) {
+        this.representante = representante;
     }
 
-    public List<Catalogo> getListaCatalogos() {
-        listaCatalogos = rn_catalogo.obterTodosOrdenado();
-        return listaCatalogos;
+    public List<Representante> getListaRepresentantes() {
+        listaRepresentantes = rn_representante.obterTodosOrdenado();
+        return listaRepresentantes;
     }
 
     public void salvar() {
         boolean limpar = true;
-        if (catalogo.getId() != null) {
+        if (representante.getId() != null) {
             limpar = false;
         }
         try {
-            if (rn_catalogo.salvar(catalogo)) {
+            if (rn_representante.salvar(representante)) {
                 BeanMessageUtil.criarMensagemDeSucessoSimples(BeanMessageUtil.operacaoRealizada, "");
                 if (limpar) {
-                    catalogo = new Catalogo();
+                    representante = new Representante();
                 }
             } else {
                 BeanMessageUtil.criarMensagemDeAlertaSimples(BeanMessageUtil.falhaAoSalvar,
@@ -63,9 +63,9 @@ public class CatalogoBean {
 
     public void excluir() {
         try {
-            if (rn_catalogo.remover(catalogo)) {
+            if (rn_representante.remover(representante)) {
                 BeanMessageUtil.criarMensagemDeSucessoSimples(BeanMessageUtil.operacaoRealizada, "");
-                catalogo = new Catalogo();
+                representante = new Representante();
             } else {
                 BeanMessageUtil.criarMensagemDeAlertaSimples(BeanMessageUtil.falhaAoExlcuir,
                         BeanMessageUtil.erroEmMetodo);
