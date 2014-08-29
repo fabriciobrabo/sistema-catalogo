@@ -45,6 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Representante.findByCidade", query = "SELECT r FROM Representante r WHERE r.cidade = :cidade"),
     @NamedQuery(name = "Representante.findByEstado", query = "SELECT r FROM Representante r WHERE r.estado = :estado")})
 public class Representante implements Serializable {
+
     @JoinColumn(name = "usuario", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuario;
@@ -82,13 +83,17 @@ public class Representante implements Serializable {
     private String estado;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "representante", orphanRemoval = true)
-    private List<RepresentanteMonitor> representanteMonitorList;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "representante", orphanRemoval = true)
     private List<RepresentanteCatalogo> representanteCatalogoList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "representante", orphanRemoval = true)
-    private List<ParceiroRepresentante> parceiroRepresentanteList;
+    private List<Monitor> monitorList;
+
+    @OneToMany(mappedBy = "representante")
+    private List<Pedido> pedidoList;
+
+    @JoinColumn(name = "parceiro", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Parceiro parceiro;
 
     public Representante() {
     }
@@ -197,14 +202,31 @@ public class Representante implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    @XmlTransient
-    public List<RepresentanteMonitor> getRepresentanteMonitorList() {
-        return representanteMonitorList;
+    
+    public Parceiro getParceiro() {
+        return parceiro;
     }
 
-    public void setRepresentanteMonitorList(List<RepresentanteMonitor> representanteMonitorList) {
-        this.representanteMonitorList = representanteMonitorList;
+    public void setParceiro(Parceiro parceiro) {
+        this.parceiro = parceiro;
+    }
+
+    @XmlTransient
+    public List<Monitor> getMonitorList() {
+        return monitorList;
+    }
+
+    public void setMonitorList(List<Monitor> monitorList) {
+        this.monitorList = monitorList;
+    }
+
+    @XmlTransient
+    public List<Pedido> getPedidoList() {
+        return pedidoList;
+    }
+
+    public void setPedidoList(List<Pedido> pedidoList) {
+        this.pedidoList = pedidoList;
     }
 
     @XmlTransient
@@ -214,15 +236,6 @@ public class Representante implements Serializable {
 
     public void setRepresentanteCatalogoList(List<RepresentanteCatalogo> representanteCatalogoList) {
         this.representanteCatalogoList = representanteCatalogoList;
-    }
-
-    @XmlTransient
-    public List<ParceiroRepresentante> getParceiroRepresentanteList() {
-        return parceiroRepresentanteList;
-    }
-
-    public void setParceiroRepresentanteList(List<ParceiroRepresentante> parceiroRepresentanteList) {
-        this.parceiroRepresentanteList = parceiroRepresentanteList;
     }
 
     @Override
@@ -249,5 +262,6 @@ public class Representante implements Serializable {
     public String toString() {
         return "br.fcb.venda.entidade.Representante[ id=" + id + " ]";
     }
+
 
 }

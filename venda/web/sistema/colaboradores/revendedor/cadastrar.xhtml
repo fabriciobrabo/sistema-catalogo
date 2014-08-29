@@ -6,83 +6,81 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/templatePadrao.xhtml">
         <ui:define name="conteudoCentro">
-            <p:panel header="Editar Representante" style="text-align: center">
+            <p:panel header="Cadastrar Revendedor" style="text-align: center">
                 <div id="divConteudoCentro">
                     <h:outputStylesheet 
                         library="css"
                         name="cssLayoutConteudoCentro.css"/>
-                    <h:inputHidden 
-                        value="#{representanteBean.representante}" 
-                        converter="representanteConversor"/>
                     <h:panelGrid columns="2" style="text-align: center">
                         <p:outputLabel 
                             value="Nome:*"/>
                         <p:inputText 
-                            value="#{representanteBean.representante.nome}"/>
+                            value="#{revendedorBean.revendedor.nome}"/>
                         <p:outputLabel 
                             value="Sobrenome:*"/>
                         <p:inputText 
-                            value="#{representanteBean.representante.sobrenome}"/>
+                            value="#{revendedorBean.revendedor.sobrenome}"/>
                         <p:outputLabel 
                             value="CPF:*"/>
                         <p:inputMask
                             mask="999-999-999-99"
-                            value="#{representanteBean.representante.cpf}"/>
+                            value="#{revendedorBean.revendedor.cpf}"/>
                         <p:outputLabel 
                             value="RG:*"/>
                         <p:inputText 
-                            value="#{representanteBean.representante.rg}"/>
+                            value="#{revendedorBean.revendedor.rg}"/>
                         <p:outputLabel 
                             value="UF:*"/>
                         <p:inputText 
-                            value="#{representanteBean.representante.estado}"/>
+                            value="#{revendedorBean.revendedor.estado}"/>
                         <p:outputLabel 
                             value="Cidade:*"/>
                         <p:inputText 
-                            value="#{representanteBean.representante.cidade}"/>
+                            value="#{revendedorBean.revendedor.cidade}"/>
                         <p:outputLabel 
                             value="Bairro:*"/>
                         <p:inputText 
-                            value="#{representanteBean.representante.bairro}"/>
+                            value="#{revendedorBean.revendedor.bairro}"/>
                         <p:outputLabel 
                             value="Endereço:*"/>
                         <p:inputText 
-                            value="#{representanteBean.representante.endereco}"/>
+                            value="#{revendedorBean.revendedor.endereco}"/>
                         <p:outputLabel 
                             value="CEP:"/>
                         <p:inputMask 
                             mask="99999-999"
-                            value="#{representanteBean.representante.cep}"/>
+                            value="#{revendedorBean.revendedor.cep}"/>
                         <p:outputLabel 
-                            value="Selecione o parceiro:* "
-                            for="acParceiro"/>
+                            value="Selecione o monitor:* "
+                            for="acMonitor"/>
                         <p:autoComplete 
-                            id="acParceiro"
-                            value="#{representanteBean.representante.parceiro}" 
-                            converter="parceiroConversor"
-                            completeMethod="#{representanteBean.autoCompleteParceiro}"
-                            var="parceiro"
-                            itemLabel="#{parceiro.nome}"
-                            itemValue="#{parceiro}"
+                            id="acMonitor"
+                            value="#{revendedorBean.revendedor.monitor}" 
+                            converter="monitorConversor"
+                            completeMethod="#{revendedorBean.autoCompleteMonitor}"
+                            var="monitor"
+                            itemLabel="#{monitor.nome}"
+                            itemValue="#{monitor}"
                             >
                             <p:column headerText="Nome Completo">
-                                <h:outputText value="#{parceiro.nome} #{parceiro.sobrenome}" />
+                                <h:outputText value="#{monitor.nome} #{monitor.sobrenome}" />
                             </p:column>
 
                             <p:column headerText="CPF">
-                                <h:outputText value="#{parceiro.cpf}" />
+                                <h:outputText value="#{monitor.cpf}" />
                             </p:column>
                         </p:autoComplete>
                         <p:commandButton 
                             value="Salvar"
-                            action="#{representanteBean.salvar}"
+                            action="#{revendedorBean.salvar}"
                             update="formCentro">
                         </p:commandButton>
                         <p:commandButton
                             ajax="false"
                             value="Ir para a lista"
-                            action="#{representanteBean.irLista}"/>
+                            action="#{revendedorBean.irLista}"/>
                     </h:panelGrid>
+
                 </div>
             </p:panel>
         </ui:define>

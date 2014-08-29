@@ -6,9 +6,7 @@
 package br.fcb.venda.bean;
 
 import br.fcb.venda.entidade.Parceiro;
-import br.fcb.venda.entidade.Representante;
 import br.fcb.venda.rn.ParceiroRN;
-import br.fcb.venda.rn.RepresentanteRN;
 import br.fcb.venda.utilitarios.BeanMessageUtil;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -20,36 +18,35 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class RepresentanteBean {
+public class ParceiroBean {
 
-    private Representante representante = new Representante();
-    private final RepresentanteRN rn_representante = new RepresentanteRN();
+    private Parceiro parceiro = new Parceiro();
     private final ParceiroRN rn_parceiro = new ParceiroRN();
-    private List<Representante> listaRepresentantes;
+    private List<Parceiro> listaParceiros;
 
-    public Representante getRepresentante() {
-        return representante;
+    public Parceiro getParceiro() {
+        return parceiro;
     }
 
-    public void setRepresentante(Representante representante) {
-        this.representante = representante;
+    public void setParceiro(Parceiro parceiro) {
+        this.parceiro = parceiro;
     }
 
-    public List<Representante> getListaRepresentantes() {
-        listaRepresentantes = rn_representante.obterTodosOrdenado();
-        return listaRepresentantes;
+    public List<Parceiro> getListaParceiros() {
+        listaParceiros = rn_parceiro.obterTodosOrdenado();
+        return listaParceiros;
     }
 
     public void salvar() {
         boolean limpar = true;
-        if (representante.getId() != null) {
+        if (parceiro.getId() != null) {
             limpar = false;
         }
         try {
-            if (rn_representante.salvar(representante)) {
+            if (rn_parceiro.salvar(parceiro)) {
                 BeanMessageUtil.criarMensagemDeSucessoSimples(BeanMessageUtil.operacaoRealizada, "");
                 if (limpar) {
-                    representante = new Representante();
+                    parceiro = new Parceiro();
                 }
             } else {
                 BeanMessageUtil.criarMensagemDeAlertaSimples(BeanMessageUtil.falhaAoSalvar,
@@ -66,9 +63,9 @@ public class RepresentanteBean {
 
     public void excluir() {
         try {
-            if (rn_representante.remover(representante)) {
+            if (rn_parceiro.remover(parceiro)) {
                 BeanMessageUtil.criarMensagemDeSucessoSimples(BeanMessageUtil.operacaoRealizada, "");
-                representante = new Representante();
+                parceiro = new Parceiro();
             } else {
                 BeanMessageUtil.criarMensagemDeAlertaSimples(BeanMessageUtil.falhaAoExlcuir,
                         BeanMessageUtil.erroEmMetodo);
@@ -76,10 +73,6 @@ public class RepresentanteBean {
         } catch (Exception e) {
             BeanMessageUtil.criarMensagemDeErroSimples(BeanMessageUtil.erroEmMetodo, BeanMessageUtil.erroEmMetodoMaisMsgDeCatch + e.getMessage());
         }
-    }
-    
-    public List<Parceiro> autoCompleteParceiro(String busca){
-        return rn_parceiro.autoCompleteParceiro(busca);
     }
 
     public String adicionarNovo() {

@@ -7,6 +7,7 @@ package br.fcb.venda.rn;
 
 import br.fcb.venda.dao.GenericDAO;
 import br.fcb.venda.entidade.Monitor;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +48,31 @@ public class MonitorRN implements InterfaceRN<Monitor> {
     @Override
     public boolean remover(Monitor o) {
         return dao.excluir(o);
+    }
+    
+    public List< Monitor> obterTodosOrdenado() {
+        return dao.obterTodosOrdenado(Monitor.class, "nome");
+    }
+    
+    public List<Monitor> autoCompleteMonitor(String busca) {
+        if (busca == null || busca.length() < 3) {
+            return null;
+        } else {
+            List<Monitor> resposta = new ArrayList<Monitor>();
+            for (Monitor monitor : obterTodos()) {
+                if (!(monitor.getNome() + monitor.getSobrenome()).toUpperCase().contains(busca.toUpperCase())) {
+                    //Não encontrou no nome, então tenta pelo cpf
+                    if (monitor.getCpf().toUpperCase().contains(busca.toUpperCase())) {
+                        resposta.add(monitor);
+                        break;
+                    }
+                } else {
+                    //Encontrou pelo nome, então adiciona
+                    resposta.add(monitor);
+                }
+            }
+            return resposta;
+        }
     }
 
 }
