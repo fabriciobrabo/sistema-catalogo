@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.fcb.venda.entidade;
 
 import java.io.Serializable;
@@ -36,26 +35,37 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Catalogo.findById", query = "SELECT c FROM Catalogo c WHERE c.id = :id"),
     @NamedQuery(name = "Catalogo.findByNome", query = "SELECT c FROM Catalogo c WHERE c.nome = :nome")})
 public class Catalogo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_catalogo")
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "nome")
     private String nome;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo", orphanRemoval = true)
-    private List<MonitorCatalogo> monitorCatalogoList;
-    
+
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "percent_representante")
+    private Double percentRepresentante;
+
+    @Column(name = "percent_monitor")
+    private Double percentMonitor;
+
+    @Column(name = "percent_revendedor")
+    private Double percentRevendedor;
+
+    @Column(name = "fornecedor")
+    private String fornecedor;
+
+    @Column(name = "fabricante")
+    private String fabricante;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo", orphanRemoval = true)
     private List<ParceiroCatalogo> parceiroCatalogoList;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo", orphanRemoval = true)
     private List<RepresentanteCatalogo> representanteCatalogoList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogo", orphanRemoval = true)
-    private List<RevendedorCatalogo> revendedorCatalogoList;
 
     public Catalogo() {
     }
@@ -85,13 +95,44 @@ public class Catalogo implements Serializable {
         this.nome = nome;
     }
 
-    @XmlTransient
-    public List<MonitorCatalogo> getMonitorCatalogoList() {
-        return monitorCatalogoList;
+    public Double getPercentRepresentante() {
+        return percentRepresentante;
     }
 
-    public void setMonitorCatalogoList(List<MonitorCatalogo> monitorCatalogoList) {
-        this.monitorCatalogoList = monitorCatalogoList;
+    public void setPercentRepresentante(Double percentRepresentante) {
+        this.percentRepresentante = percentRepresentante;
+    }
+
+    public Double getPercentMonitor() {
+        return percentMonitor;
+    }
+
+    public void setPercentMonitor(Double percentMonitor) {
+        this.percentMonitor = percentMonitor;
+    }
+
+    public Double getPercentRevendedor() {
+        return percentRevendedor;
+    }
+
+    public void setPercentRevendedor(Double percentRevendedor) {
+        this.percentRevendedor = percentRevendedor;
+    }
+
+    public String getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(String fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
     }
 
     @XmlTransient
@@ -110,15 +151,6 @@ public class Catalogo implements Serializable {
 
     public void setRepresentanteCatalogoList(List<RepresentanteCatalogo> representanteCatalogoList) {
         this.representanteCatalogoList = representanteCatalogoList;
-    }
-
-    @XmlTransient
-    public List<RevendedorCatalogo> getRevendedorCatalogoList() {
-        return revendedorCatalogoList;
-    }
-
-    public void setRevendedorCatalogoList(List<RevendedorCatalogo> revendedorCatalogoList) {
-        this.revendedorCatalogoList = revendedorCatalogoList;
     }
 
     @Override
@@ -145,5 +177,5 @@ public class Catalogo implements Serializable {
     public String toString() {
         return "br.fcb.venda.entidade.Catalogo[ id=" + id + " ]";
     }
-    
+
 }

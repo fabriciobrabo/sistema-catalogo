@@ -48,10 +48,14 @@
                         sticky="false"
                         autoUpdate="true"
                         />
-
-                    <ui:insert name="conteudoCentro">
-                        Content
-                    </ui:insert>
+                    <div id="divConteudoCentro">
+                        <h:outputStylesheet 
+                            library="css"
+                            name="cssLayoutConteudoCentro.css"/>
+                        <ui:insert name="conteudoCentro">
+                            Content
+                        </ui:insert>
+                    </div>
 
                 </h:form>
             </p:layoutUnit>

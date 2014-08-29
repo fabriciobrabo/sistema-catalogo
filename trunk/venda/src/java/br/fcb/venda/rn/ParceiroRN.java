@@ -7,6 +7,7 @@ package br.fcb.venda.rn;
 
 import br.fcb.venda.dao.GenericDAO;
 import br.fcb.venda.entidade.Parceiro;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,6 +50,31 @@ public class ParceiroRN implements InterfaceRN<Parceiro> {
     @Override
     public boolean remover(Parceiro o) {
         return dao.excluir(o);
+    }
+
+    public List<Parceiro> obterTodosOrdenado() {
+        return dao.obterTodosOrdenado(Parceiro.class, "nome");
+    }
+
+    public List<Parceiro> autoCompleteParceiro(String busca) {
+        if (busca == null || busca.length() < 3) {
+            return null;
+        } else {
+            List<Parceiro> resposta = new ArrayList<Parceiro>();
+            for (Parceiro parceiro : obterTodos()) {
+                if (!(parceiro.getNome() + parceiro.getSobrenome()).toUpperCase().contains(busca.toUpperCase())) {
+                    //Não encontrou no nome, então tenta pelo cpf
+                    if (parceiro.getCpf().toUpperCase().contains(busca.toUpperCase())) {
+                        resposta.add(parceiro);
+                        break;
+                    }
+                } else {
+                    //Encontrou pelo nome, então adiciona
+                    resposta.add(parceiro);
+                }
+            }
+            return resposta;
+        }
     }
 
 }

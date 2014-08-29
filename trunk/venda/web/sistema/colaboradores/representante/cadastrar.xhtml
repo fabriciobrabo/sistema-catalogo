@@ -13,9 +13,63 @@
                         name="cssLayoutConteudoCentro.css"/>
                     <h:panelGrid columns="2" style="text-align: center">
                         <p:outputLabel 
-                            value="Nome do Representante:*"/>
+                            value="Nome:*"/>
                         <p:inputText 
                             value="#{representanteBean.representante.nome}"/>
+                        <p:outputLabel 
+                            value="Sobrenome:*"/>
+                        <p:inputText 
+                            value="#{representanteBean.representante.sobrenome}"/>
+                        <p:outputLabel 
+                            value="CPF:*"/>
+                        <p:inputMask
+                            mask="999-999-999-99"
+                            value="#{representanteBean.representante.cpf}"/>
+                        <p:outputLabel 
+                            value="RG:*"/>
+                        <p:inputText 
+                            value="#{representanteBean.representante.rg}"/>
+                        <p:outputLabel 
+                            value="UF:*"/>
+                        <p:inputText 
+                            value="#{representanteBean.representante.estado}"/>
+                        <p:outputLabel 
+                            value="Cidade:*"/>
+                        <p:inputText 
+                            value="#{representanteBean.representante.cidade}"/>
+                        <p:outputLabel 
+                            value="Bairro:*"/>
+                        <p:inputText 
+                            value="#{representanteBean.representante.bairro}"/>
+                        <p:outputLabel 
+                            value="Endereço:*"/>
+                        <p:inputText 
+                            value="#{representanteBean.representante.endereco}"/>
+                        <p:outputLabel 
+                            value="CEP:"/>
+                        <p:inputMask 
+                            mask="99999-999"
+                            value="#{representanteBean.representante.cep}"/>
+                        <p:outputLabel 
+                            value="Selecione o parceiro:* "
+                            for="acParceiro"/>
+                        <p:autoComplete 
+                            id="acParceiro"
+                            value="#{representanteBean.representante.parceiro}" 
+                            converter="parceiroConversor"
+                            completeMethod="#{representanteBean.autoCompleteParceiro}"
+                            var="parceiro"
+                            itemLabel="#{parceiro.nome}"
+                            itemValue="#{parceiro}"
+                            >
+                            <p:column headerText="Nome Completo">
+                                <h:outputText value="#{parceiro.nome} #{parceiro.sobrenome}" />
+                            </p:column>
+
+                            <p:column headerText="CPF">
+                                <h:outputText value="#{parceiro.cpf}" />
+                            </p:column>
+                        </p:autoComplete>
                         <p:commandButton 
                             value="Cadastrar"
                             action="#{representanteBean.salvar}"

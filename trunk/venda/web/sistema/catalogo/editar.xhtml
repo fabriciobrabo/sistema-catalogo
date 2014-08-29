@@ -19,6 +19,21 @@
                             value="Nome do Catálogo:*"/>
                         <p:inputText 
                             value="#{catalogoBean.catalogo.nome}"/>
+                        <p:outputLabel 
+                            value="Taxa de % Revendendor:*"/>
+                        <p:inputMask
+                            mask="9999"
+                            value="#{catalogoBean.catalogo.percentRevendedor}"/>
+                        <p:outputLabel 
+                            value="Taxa de % Monito:*"/>
+                        <p:inputMask
+                            mask="9999"
+                            value="#{catalogoBean.catalogo.percentMonitor}"/>
+                        <p:outputLabel 
+                            value="Taxa de % Representante:*"/>
+                        <p:inputMask
+                            mask="9999"
+                            value="#{catalogoBean.catalogo.percentRepresentante}"/>
                         <p:commandButton 
                             value="Salvar"
                             action="#{catalogoBean.salvar}"

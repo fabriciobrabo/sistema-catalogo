@@ -45,6 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Revendedor.findByCidade", query = "SELECT r FROM Revendedor r WHERE r.cidade = :cidade"),
     @NamedQuery(name = "Revendedor.findByEstado", query = "SELECT r FROM Revendedor r WHERE r.estado = :estado")})
 public class Revendedor implements Serializable {
+
     @JoinColumn(name = "usuario", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuario;
@@ -81,11 +82,12 @@ public class Revendedor implements Serializable {
     @Column(name = "estado")
     private String estado;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "revendedor", orphanRemoval = true)
-    private List<MonitorRevendedor> monitorRevendedorList;
+    @OneToMany(mappedBy = "revendedor")
+    private List<Pedido> pedidoList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "revendedor", orphanRemoval = true)
-    private List<RevendedorCatalogo> revendedorCatalogoList;
+    @JoinColumn(name = "monitor", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Monitor monitor;
 
     public Revendedor() {
     }
@@ -195,22 +197,21 @@ public class Revendedor implements Serializable {
         this.usuario = usuario;
     }
 
+    public Monitor getMonitor() {
+        return monitor;
+    }
+
+    public void setMonitor(Monitor monitor) {
+        this.monitor = monitor;
+    }
+
     @XmlTransient
-    public List<MonitorRevendedor> getMonitorRevendedorList() {
-        return monitorRevendedorList;
+    public List<Pedido> getPedidoList() {
+        return pedidoList;
     }
 
-    public void setMonitorRevendedorList(List<MonitorRevendedor> monitorRevendedorList) {
-        this.monitorRevendedorList = monitorRevendedorList;
-    }
-
-    @XmlTransient
-    public List<RevendedorCatalogo> getRevendedorCatalogoList() {
-        return revendedorCatalogoList;
-    }
-
-    public void setRevendedorCatalogoList(List<RevendedorCatalogo> revendedorCatalogoList) {
-        this.revendedorCatalogoList = revendedorCatalogoList;
+    public void setPedidoList(List<Pedido> pedidoList) {
+        this.pedidoList = pedidoList;
     }
 
     @Override

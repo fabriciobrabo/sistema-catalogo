@@ -7,6 +7,7 @@ package br.fcb.venda.rn;
 
 import br.fcb.venda.dao.GenericDAO;
 import br.fcb.venda.entidade.Representante;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +34,10 @@ public class RepresentanteRN implements InterfaceRN<Representante> {
 
     @Override
     public boolean salvar(Representante o) {
-        if (o.getNome().equals("")) {
+        if (o.getNome().equals("") || o.getBairro().equals("")
+                || o.getCidade().equals("") || o.getEstado().equals("")
+                || o.getCpf().equals("") || o.getRg().equals("")
+                || o.getEndereco().equals("") || o.getSobrenome().equals("")) {
             return false;
         } else {
             if (o.getId() == null) {
@@ -52,5 +56,25 @@ public class RepresentanteRN implements InterfaceRN<Representante> {
     public List<Representante> obterTodosOrdenado() {
         return dao.obterTodosOrdenado(Representante.class, "nome");
     }
-
+    
+    public List<Representante> autoCompleteRepresentante(String busca) {
+        if (busca == null || busca.length() < 3) {
+            return null;
+        } else {
+            List<Representante> resposta = new ArrayList<Representante>();
+            for (Representante representante : obterTodos()) {
+                if (!(representante.getNome() + representante.getSobrenome()).toUpperCase().contains(busca.toUpperCase())) {
+                    //Não encontrou no nome, então tenta pelo cpf
+                    if (representante.getCpf().toUpperCase().contains(busca.toUpperCase())) {
+                        resposta.add(representante);
+                        break;
+                    }
+                } else {
+                    //Encontrou pelo nome, então adiciona
+                    resposta.add(representante);
+                }
+            }
+            return resposta;
+        }
+    }
 }

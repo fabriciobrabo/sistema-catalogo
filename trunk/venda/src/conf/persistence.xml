@@ -4,17 +4,15 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>br.fcb.venda.entidade.Catalogo</class>
     <class>br.fcb.venda.entidade.Monitor</class>
-    <class>br.fcb.venda.entidade.MonitorCatalogo</class>
-    <class>br.fcb.venda.entidade.MonitorRevendedor</class>
     <class>br.fcb.venda.entidade.Parceiro</class>
     <class>br.fcb.venda.entidade.ParceiroCatalogo</class>
-    <class>br.fcb.venda.entidade.ParceiroRepresentante</class>
     <class>br.fcb.venda.entidade.Representante</class>
     <class>br.fcb.venda.entidade.RepresentanteCatalogo</class>
-    <class>br.fcb.venda.entidade.RepresentanteMonitor</class>
     <class>br.fcb.venda.entidade.Revendedor</class>
-    <class>br.fcb.venda.entidade.RevendedorCatalogo</class>
     <class>br.fcb.venda.entidade.Usuario</class>
+    <class>br.fcb.venda.entidade.Pedido</class>
+    <class>br.fcb.venda.entidade.Produto</class>
+    <class>br.fcb.venda.entidade.ItemPedido</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/venda"/>

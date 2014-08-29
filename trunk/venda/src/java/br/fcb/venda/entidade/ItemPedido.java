@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.fcb.venda.entidade;
 
 import java.io.Serializable;
@@ -26,31 +25,37 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ufrastic
  */
 @Entity
-@Table(name = "monitor_revendedor")
+@Table(name = "item_pedido")
 @XmlRootElement
-@SequenceGenerator(name = "venda_sequence_monitor_revendedor", sequenceName = "venda_sequence_monitor_revendedor")
+@SequenceGenerator(name = "venda_sequence_itemPedido", sequenceName = "venda_sequence_itemPedido")
 @NamedQueries({
-    @NamedQuery(name = "MonitorRevendedor.findAll", query = "SELECT m FROM MonitorRevendedor m"),
-    @NamedQuery(name = "MonitorRevendedor.findById", query = "SELECT m FROM MonitorRevendedor m WHERE m.id = :id")})
-public class MonitorRevendedor implements Serializable {
+    @NamedQuery(name = "ItemPedido.findAll", query = "SELECT i FROM ItemPedido i"),
+    @NamedQuery(name = "ItemPedido.findById", query = "SELECT i FROM ItemPedido i WHERE i.id = :id"),
+    @NamedQuery(name = "ItemPedido.findByQuantidade", query = "SELECT i FROM ItemPedido i WHERE i.quantidade = :quantidade")})
+public class ItemPedido implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_monitor_revendedor")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_itemPedido")
+    @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    
-    @JoinColumn(name = "revendedor", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Revendedor revendedor;
-    
-    @JoinColumn(name = "monitor", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Monitor monitor;
 
-    public MonitorRevendedor() {
+    @Column(name = "quantidade")
+    private Integer quantidade;
+
+    @JoinColumn(name = "pedido", referencedColumnName = "id")
+    @ManyToOne
+    private Pedido pedido;
+
+    @JoinColumn(name = "produto", referencedColumnName = "id")
+    @ManyToOne
+    private Produto produto;
+
+    public ItemPedido() {
     }
 
-    public MonitorRevendedor(Integer id) {
+    public ItemPedido(Integer id) {
         this.id = id;
     }
 
@@ -62,20 +67,28 @@ public class MonitorRevendedor implements Serializable {
         this.id = id;
     }
 
-    public Revendedor getRevendedor() {
-        return revendedor;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setRevendedor(Revendedor revendedor) {
-        this.revendedor = revendedor;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public Monitor getMonitor() {
-        return monitor;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setMonitor(Monitor monitor) {
-        this.monitor = monitor;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     @Override
@@ -88,10 +101,10 @@ public class MonitorRevendedor implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MonitorRevendedor)) {
+        if (!(object instanceof ItemPedido)) {
             return false;
         }
-        MonitorRevendedor other = (MonitorRevendedor) object;
+        ItemPedido other = (ItemPedido) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -100,7 +113,7 @@ public class MonitorRevendedor implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fcb.venda.entidade.MonitorRevendedor[ id=" + id + " ]";
+        return "br.fcb.venda.entidade.ItemPedido[ id=" + id + " ]";
     }
-    
+
 }

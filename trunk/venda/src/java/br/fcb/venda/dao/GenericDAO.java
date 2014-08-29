@@ -120,7 +120,7 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
             return resposta;
         }
     }
-
+    
     public boolean iniciarTransacao() {
         try {
             if (em.getTransaction().isActive()) {

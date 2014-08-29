@@ -45,6 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Parceiro.findByCidade", query = "SELECT p FROM Parceiro p WHERE p.cidade = :cidade"),
     @NamedQuery(name = "Parceiro.findByEstado", query = "SELECT p FROM Parceiro p WHERE p.estado = :estado")})
 public class Parceiro implements Serializable {
+
     @JoinColumn(name = "usuario", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuario;
@@ -85,7 +86,7 @@ public class Parceiro implements Serializable {
     private List<ParceiroCatalogo> parceiroCatalogoList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parceiro", orphanRemoval = true)
-    private List<ParceiroRepresentante> parceiroRepresentanteList;
+    private List<Representante> representanteList;
 
     public Parceiro() {
     }
@@ -205,12 +206,12 @@ public class Parceiro implements Serializable {
     }
 
     @XmlTransient
-    public List<ParceiroRepresentante> getParceiroRepresentanteList() {
-        return parceiroRepresentanteList;
+    public List<Representante> getRepresentanteList() {
+        return representanteList;
     }
 
-    public void setParceiroRepresentanteList(List<ParceiroRepresentante> parceiroRepresentanteList) {
-        this.parceiroRepresentanteList = parceiroRepresentanteList;
+    public void setRepresentanteList(List<Representante> representanteList) {
+        this.representanteList = representanteList;
     }
 
     @Override

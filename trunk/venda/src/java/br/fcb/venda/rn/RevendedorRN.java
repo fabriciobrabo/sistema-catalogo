@@ -48,5 +48,9 @@ public class RevendedorRN implements InterfaceRN<Revendedor> {
     public boolean remover(Revendedor o) {
         return dao.excluir(o);
     }
+    
+    public List<Revendedor> obterTodosOrdenado() {
+        return dao.obterTodosOrdenado(Revendedor.class, "nome");
+    }
 
 }

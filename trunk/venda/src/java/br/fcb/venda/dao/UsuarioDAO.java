@@ -6,15 +6,15 @@
 package br.fcb.venda.dao;
 
 import br.fcb.venda.entidade.Usuario;
-import java.util.List;
 import javax.persistence.Query;
 
 /**
  *
  * @author ufrastic
  */
-public class UsuarioDAO extends GenericDAO<Usuario> {
+public class UsuarioDAO extends GenericDAO<Usuario> implements InterfaceUsuarioDAO<Usuario> {
 
+    @Override
     public Usuario obter(String acesso) {
         String query = "SELECT u FROM Usuario u WHERE u.email = :acesso OR "
                 + "u.emailAlternativo = :acesso OR "

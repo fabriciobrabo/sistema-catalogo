@@ -7,15 +7,35 @@
     <ui:composition template="/template/templatePadrao.xhtml">
         <ui:define name="conteudoCentro">
             <p:panel header="Cadastrar Catálogo" style="text-align: center">
-                <div id="divConteudoCentro">
-                    <h:outputStylesheet 
-                        library="css"
-                        name="cssLayoutConteudoCentro.css"/>
+                
                     <h:panelGrid columns="2" style="text-align: center">
                         <p:outputLabel 
                             value="Nome do Catálogo:*"/>
                         <p:inputText 
                             value="#{catalogoBean.catalogo.nome}"/>
+                        <p:outputLabel 
+                            value="Fabricante:*"/>
+                        <p:inputText 
+                            value="#{catalogoBean.catalogo.fabricante}"/>
+                        <p:outputLabel 
+                            value="Fornecedor:*"/>
+                        <p:inputText 
+                            value="#{catalogoBean.catalogo.fornecedor}"/>
+                        <p:outputLabel 
+                            value="Taxa de % Revendendor:*"/>
+                        <p:inputMask
+                            mask="9999"
+                            value="#{catalogoBean.catalogo.percentRevendedor}"/>
+                        <p:outputLabel 
+                            value="Taxa de % Monito:*"/>
+                        <p:inputMask
+                            mask="9999"
+                            value="#{catalogoBean.catalogo.percentMonitor}"/>
+                        <p:outputLabel 
+                            value="Taxa de % Representante:*"/>
+                        <p:inputMask
+                            mask="9999"
+                            value="#{catalogoBean.catalogo.percentRepresentante}"/>
                         <p:commandButton 
                             value="Cadastrar"
                             action="#{catalogoBean.salvar}"
@@ -27,7 +47,6 @@
                             action="#{catalogoBean.irLista}"/>
                     </h:panelGrid>
 
-                </div>
             </p:panel>
         </ui:define>
     </ui:composition>

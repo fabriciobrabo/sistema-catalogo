@@ -5,9 +5,9 @@
  */
 package br.fcb.venda.bean;
 
-import br.fcb.venda.entidade.Parceiro;
+import br.fcb.venda.entidade.Monitor;
 import br.fcb.venda.entidade.Representante;
-import br.fcb.venda.rn.ParceiroRN;
+import br.fcb.venda.rn.MonitorRN;
 import br.fcb.venda.rn.RepresentanteRN;
 import br.fcb.venda.utilitarios.BeanMessageUtil;
 import java.util.List;
@@ -20,36 +20,36 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class RepresentanteBean {
+public class MonitorBean {
 
-    private Representante representante = new Representante();
+    private Monitor monitor = new Monitor();
+    private final MonitorRN rn_monitor = new MonitorRN();
     private final RepresentanteRN rn_representante = new RepresentanteRN();
-    private final ParceiroRN rn_parceiro = new ParceiroRN();
-    private List<Representante> listaRepresentantes;
+    private List<Monitor> listaMonitores;
 
-    public Representante getRepresentante() {
-        return representante;
+    public Monitor getMonitor() {
+        return monitor;
     }
 
-    public void setRepresentante(Representante representante) {
-        this.representante = representante;
+    public void setCatalogo(Monitor monitor) {
+        this.monitor = monitor;
     }
 
-    public List<Representante> getListaRepresentantes() {
-        listaRepresentantes = rn_representante.obterTodosOrdenado();
-        return listaRepresentantes;
+    public List<Monitor> getListaMonitores() {
+        listaMonitores = rn_monitor.obterTodosOrdenado();
+        return listaMonitores;
     }
 
     public void salvar() {
         boolean limpar = true;
-        if (representante.getId() != null) {
+        if (monitor.getId() != null) {
             limpar = false;
         }
         try {
-            if (rn_representante.salvar(representante)) {
+            if (rn_monitor.salvar(monitor)) {
                 BeanMessageUtil.criarMensagemDeSucessoSimples(BeanMessageUtil.operacaoRealizada, "");
                 if (limpar) {
-                    representante = new Representante();
+                    monitor = new Monitor();
                 }
             } else {
                 BeanMessageUtil.criarMensagemDeAlertaSimples(BeanMessageUtil.falhaAoSalvar,
@@ -66,9 +66,9 @@ public class RepresentanteBean {
 
     public void excluir() {
         try {
-            if (rn_representante.remover(representante)) {
+            if (rn_monitor.remover(monitor)) {
                 BeanMessageUtil.criarMensagemDeSucessoSimples(BeanMessageUtil.operacaoRealizada, "");
-                representante = new Representante();
+                monitor = new Monitor();
             } else {
                 BeanMessageUtil.criarMensagemDeAlertaSimples(BeanMessageUtil.falhaAoExlcuir,
                         BeanMessageUtil.erroEmMetodo);
@@ -77,9 +77,9 @@ public class RepresentanteBean {
             BeanMessageUtil.criarMensagemDeErroSimples(BeanMessageUtil.erroEmMetodo, BeanMessageUtil.erroEmMetodoMaisMsgDeCatch + e.getMessage());
         }
     }
-    
-    public List<Parceiro> autoCompleteParceiro(String busca){
-        return rn_parceiro.autoCompleteParceiro(busca);
+
+    public List<Representante> autoCompleteRepresentante(String busca) {
+        return rn_representante.autoCompleteRepresentante(busca);
     }
 
     public String adicionarNovo() {

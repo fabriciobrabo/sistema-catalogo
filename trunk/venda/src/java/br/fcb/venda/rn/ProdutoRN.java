@@ -6,34 +6,35 @@
 package br.fcb.venda.rn;
 
 import br.fcb.venda.dao.GenericDAO;
-import br.fcb.venda.entidade.Catalogo;
+import br.fcb.venda.entidade.Produto;
 import java.util.List;
 
 /**
  *
  * @author ufrastic
  */
-public class CatalogoRN implements InterfaceRN<Catalogo> {
+public class ProdutoRN implements InterfaceRN<Produto> {
 
-    private GenericDAO<Catalogo> dao = new GenericDAO<Catalogo>();
+    private GenericDAO<Produto> dao = new GenericDAO<Produto>();
 
     @Override
-    public Catalogo obter(Object id) {
+    public Produto obter(Object id) {
         if (id == null) {
             return null;
         } else {
-            return dao.obter(Catalogo.class, id);
+            return dao.obter(Produto.class, id);
         }
     }
 
     @Override
-    public List<Catalogo> obterTodos() {
-        return dao.obterTodos(Catalogo.class);
+    public List<Produto> obterTodos() {
+        return dao.obterTodos(Produto.class);
     }
 
     @Override
-    public boolean salvar(Catalogo o) {
-        if (o.getNome().equals("") || o.getNome() == null) {
+    public boolean salvar(Produto o) {
+        if (o.getCatalogo() == null || o.getCodigo() == null
+                || o.getNome() == null || o.getPreco() == null) {
             return false;
         } else {
             if (o.getId() == null) {
@@ -45,11 +46,8 @@ public class CatalogoRN implements InterfaceRN<Catalogo> {
     }
 
     @Override
-    public boolean remover(Catalogo o) {
+    public boolean remover(Produto o) {
         return dao.excluir(o);
     }
 
-    public List<Catalogo> obterTodosOrdenado() {
-        return dao.obterTodosOrdenado(Catalogo.class, "nome");
-    }
 }
