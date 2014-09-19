@@ -7,6 +7,7 @@ package br.fcb.venda.rn;
 
 import br.fcb.venda.dao.GenericDAO;
 import br.fcb.venda.entidade.Produto;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +49,27 @@ public class ProdutoRN implements InterfaceRN<Produto> {
     @Override
     public boolean remover(Produto o) {
         return dao.excluir(o);
+    }
+
+    public List<Produto> autoCompleteProduto(String busca) {
+        if (busca == null || busca.length() < 3) {
+            return null;
+        } else {
+            List<Produto> resposta = new ArrayList<Produto>();
+            for (Produto produto : obterTodos()) {
+                if (!produto.getNome().toUpperCase().contains(busca.toUpperCase())) {
+                    //Não encontrou pelo nome do produto, então tenta pelo codigo
+                    if (produto.getCodigo().toUpperCase().contains(busca.toUpperCase())) {
+                        resposta.add(produto);
+                        break;
+                    }
+                } else {
+                    //Encontrou pelo nome, então adiciona
+                    resposta.add(produto);
+                }
+            }
+            return resposta;
+        }
     }
 
 }

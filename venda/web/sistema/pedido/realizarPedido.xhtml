@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template/templatePadrao.xhtml">
+        <ui:define name="conteudoCentro">
+            <p:panel header="Realizar Pedido" style="text-align: center">
+                <div id="divConteudoCentro">
+                    <h:outputStylesheet 
+                        library="css"
+                        name="cssLayoutConteudoCentro.css"/>
+                    <h:panelGrid
+                        id="pgUP"
+                        columns="2"
+                        style="text-align: center">
+                        <p:outputLabel 
+                            value="Selecione o revendedor:* "
+                            for="acRevendedor"/>
+                        <p:autoComplete 
+                            id="acRevendedor"
+                            value="#{pedidoBean.pedido.revendedor}" 
+                            converter="revendedorConversor"
+                            completeMethod="#{revendedorBean.autoCompleteRevendedor}"
+                            var="revendedor"
+                            itemLabel="#{revendedor.nome}"
+                            itemValue="#{revendedor}"
+                            >
+                            <p:ajax
+                                event="itemSelect"
+                                update="pgUP"/>
+                            <p:column headerText="Nome Completo">
+                                <h:outputText value="#{revendedor.nome} #{revendedor.sobrenome}" />
+                            </p:column>
+
+                            <p:column headerText="CPF">
+                                <h:outputText value="#{revendedor.cpf}" />
+                            </p:column>
+                        </p:autoComplete>
+                        <p:outputLabel
+                            value="Monitor:"/>
+                        <p:inputText
+                            value="#{pedidoBean.pedido.revendedor.monitor}"/>
+                        <p:outputLabel
+                            value="Representante:"/>
+                        <p:inputText
+                            disabled="true"
+                            value="#{pedidoBean.pedido.revendedor.monitor.representante}"/>
+                        <p:outputLabel
+                            value="Parceiro:"/>
+                        <p:inputText
+                            disabled="true"
+                            value="#{pedidoBean.pedido.revendedor.monitor.representante.parceiro}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid
+                        columns="3"
+                        style="text-align: center">
+                        <p:outputLabel
+                            value="Selecionar Produto"/>
+                        <p:autoComplete
+                            completeMethod="#{produtoBean.autoCompleteProduto}"
+                            value="#{pedidoBean.itemPedido.produto}"
+                            var="produto"
+                            converter="produtoConversor"
+                            itemLabel="#{produto.nome}"
+                            itemValue="#{produto}">
+                            <p:column
+                                headerText="Codigo">
+                                <p:outputLabel
+                                    value="#{produto.codigo}"/>
+                            </p:column>
+                            <p:column
+                                headerText="produto">
+                                <p:outputLabel
+                                    value="#{produto.nome}"/>
+                            </p:column>
+                        </p:autoComplete>
+                        <p:commandButton
+                            value="Adicionar Produto"
+                            action="#{pedidoBean.adicionarProdutoLista}"/>
+                    </h:panelGrid>
+                </div>
+                <p:dataTable
+                    value="#{pedidoBean.pedido.itemPedidoList}"
+                    var="itemPedido">
+                    <p:column
+                        headerText="Código">
+                        <p:outputLabel
+                            value="#{itemPedido.produto.codigo}"/>
+                    </p:column>
+                    <p:column
+                        headerText="Produto">
+                        <p:outputLabel
+                            value="#{itemPedido.produto.nome}"/>
+                    </p:column>
+                    <p:column
+                        headerText="Preço">
+                        <p:outputLabel
+                            value="#{itemPedido.produto.preco}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>
+

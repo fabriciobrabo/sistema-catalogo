@@ -24,7 +24,6 @@ public class RevendedorBean {
 
     private Revendedor revendedor = new Revendedor();
     private final RevendedorRN rn_revendedor = new RevendedorRN();
-    private final MonitorRN rn_monitor = new MonitorRN();
     private List<Revendedor> listaRevendedores;
 
     public Revendedor getRevendedor() {
@@ -77,9 +76,9 @@ public class RevendedorBean {
             BeanMessageUtil.criarMensagemDeErroSimples(BeanMessageUtil.erroEmMetodo, BeanMessageUtil.erroEmMetodoMaisMsgDeCatch + e.getMessage());
         }
     }
-    
-    public List<Monitor> autoCompleteMonitor(String busca){
-        return rn_monitor.autoCompleteMonitor(busca);
+
+    public List<Revendedor> autoCompleteRevendedor(String busca) {
+        return rn_revendedor.autoCompleteRevendedor(busca);
     }
 
     public String adicionarNovo() {

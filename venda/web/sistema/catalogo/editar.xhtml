@@ -20,19 +20,24 @@
                         <p:inputText 
                             value="#{catalogoBean.catalogo.nome}"/>
                         <p:outputLabel 
+                            value="Fabricante:*"/>
+                        <p:inputText 
+                            value="#{catalogoBean.catalogo.fabricante}"/>
+                        <p:outputLabel 
+                            value="Fornecedor:*"/>
+                        <p:inputText 
+                            value="#{catalogoBean.catalogo.fornecedor}"/>
+                        <p:outputLabel 
                             value="Taxa de % Revendendor:*"/>
-                        <p:inputMask
-                            mask="9999"
+                        <p:inputText
                             value="#{catalogoBean.catalogo.percentRevendedor}"/>
                         <p:outputLabel 
                             value="Taxa de % Monito:*"/>
-                        <p:inputMask
-                            mask="9999"
+                        <p:inputText
                             value="#{catalogoBean.catalogo.percentMonitor}"/>
                         <p:outputLabel 
                             value="Taxa de % Representante:*"/>
-                        <p:inputMask
-                            mask="9999"
+                        <p:inputText
                             value="#{catalogoBean.catalogo.percentRepresentante}"/>
                         <p:commandButton 
                             value="Salvar"

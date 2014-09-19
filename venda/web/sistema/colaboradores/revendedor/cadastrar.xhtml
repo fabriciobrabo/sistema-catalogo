@@ -57,7 +57,7 @@
                             id="acMonitor"
                             value="#{revendedorBean.revendedor.monitor}" 
                             converter="monitorConversor"
-                            completeMethod="#{revendedorBean.autoCompleteMonitor}"
+                            completeMethod="#{monitorBean.autoCompleteMonitor}"
                             var="monitor"
                             itemLabel="#{monitor.nome}"
                             itemValue="#{monitor}"
@@ -80,7 +80,6 @@
                             value="Ir para a lista"
                             action="#{revendedorBean.irLista}"/>
                     </h:panelGrid>
-
                 </div>
             </p:panel>
         </ui:define>

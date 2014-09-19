@@ -24,7 +24,6 @@ public class RepresentanteBean {
 
     private Representante representante = new Representante();
     private final RepresentanteRN rn_representante = new RepresentanteRN();
-    private final ParceiroRN rn_parceiro = new ParceiroRN();
     private List<Representante> listaRepresentantes;
 
     public Representante getRepresentante() {
@@ -77,9 +76,9 @@ public class RepresentanteBean {
             BeanMessageUtil.criarMensagemDeErroSimples(BeanMessageUtil.erroEmMetodo, BeanMessageUtil.erroEmMetodoMaisMsgDeCatch + e.getMessage());
         }
     }
-    
-    public List<Parceiro> autoCompleteParceiro(String busca){
-        return rn_parceiro.autoCompleteParceiro(busca);
+
+    public List<Representante> autoCompleteRepresentante(String busca) {
+        return rn_representante.autoCompleteRepresentante(busca);
     }
 
     public String adicionarNovo() {

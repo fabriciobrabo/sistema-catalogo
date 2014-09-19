@@ -24,13 +24,13 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
     @Override
     public boolean criar(T o) {
         try {
-            em.getTransaction().begin();
+            this.iniciarTransacao();
             em.persist(o);
-            em.getTransaction().commit();
+            this.confirmarTransacao();
             return true;
         } catch (Exception e) {
-            if (em.isOpen()) {
-                em.getTransaction().rollback();
+            if (this.transacaoAberta()) {
+                this.desfazerTransacao();
             }
             return false;
         }
@@ -39,13 +39,13 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
     @Override
     public boolean atualizar(T o) {
         try {
-            em.getTransaction().begin();
+            this.iniciarTransacao();
             em.merge(o);
-            em.getTransaction().commit();
+            this.confirmarTransacao();
             return true;
         } catch (Exception e) {
-            if (em.isOpen()) {
-                em.getTransaction().rollback();
+            if (this.transacaoAberta()) {
+                this.desfazerTransacao();
             }
             return false;
         }
@@ -54,13 +54,13 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
     @Override
     public boolean excluir(T o) {
         try {
-            em.getTransaction().begin();
+            this.iniciarTransacao();
             em.remove(o);
-            em.getTransaction().commit();
+            this.confirmarTransacao();
             return true;
         } catch (Exception e) {
-            if (em.isOpen()) {
-                em.getTransaction().rollback();
+            if (this.transacaoAberta()) {
+                this.desfazerTransacao();
             }
             return false;
         }
@@ -72,15 +72,15 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
             return null;
         }
         try {
-            em.getTransaction().begin();
+            this.iniciarTransacao();
             String query = classe.getSimpleName() + ".findById";
             final Query q = em.createNamedQuery(query);
             T t = (T) q.setParameter("id", id).getSingleResult();
-            em.getTransaction().commit();
+            this.confirmarTransacao();
             return t;
         } catch (Exception e) {
-            if (em.isOpen()) {
-                em.getTransaction().rollback();
+            if (this.transacaoAberta()) {
+                this.desfazerTransacao();
             }
             return null;
         }
@@ -90,15 +90,15 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
     public List<T> obterTodos(Class<T> classe) {
         List<T> resposta = null;
         try {
-            em.getTransaction().begin();
+            this.iniciarTransacao();
             String query = classe.getSimpleName() + ".findAll";
             Query q = em.createNamedQuery(query);
             resposta = (List<T>) q.getResultList();
-            em.getTransaction().commit();
+            this.confirmarTransacao();
             return resposta;
         } catch (Exception e) {
-            if (em.isOpen()) {
-                em.getTransaction().rollback();
+            if (this.transacaoAberta()) {
+                this.desfazerTransacao();
             }
             return resposta;
         }
@@ -107,20 +107,20 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
     public List<T> obterTodosOrdenado(Class<T> classe, String atributo) {
         List<T> resposta = null;
         try {
-            em.getTransaction().begin();
+            this.iniciarTransacao();
             String query = "SELECT c FROM " + classe.getSimpleName() + " c ORDER BY c." + atributo;
             Query q = em.createQuery(query);
             resposta = (List<T>) q.getResultList();
-            em.getTransaction().commit();
+            this.desfazerTransacao();
             return resposta;
         } catch (Exception e) {
-            if (em.isOpen()) {
-                em.getTransaction().rollback();
+            if (this.transacaoAberta()) {
+                this.transacaoAberta();
             }
             return resposta;
         }
     }
-    
+
     public boolean iniciarTransacao() {
         try {
             if (em.getTransaction().isActive()) {
@@ -151,6 +151,14 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
         }
     }
 
+    public boolean transacaoAberta() {
+        try {
+            return em.isOpen();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     /**
      * @return the entityManager
      */
@@ -164,5 +172,4 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
     protected void setEntityManager(EntityManager entityManager) {
         this.em = entityManager;
     }
-
 }

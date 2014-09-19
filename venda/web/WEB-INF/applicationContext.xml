@@ -10,8 +10,8 @@
     <http auto-config="true">
         <intercept-url pattern="/sistema/inicio.xhtml" access="ROLE_MASTER" />
         <form-login 
-            login-page="/login/acesso.xhtml" 
-            authentication-failure-url="/login/acesso.xhtml?erro=true"
+            login-page="/acesso/login.xhtml" 
+            authentication-failure-url="/acesso/login.xhtml?erro=true"
             always-use-default-target = "true" 
             default-target-url = "/sistema/inicio.xhtml"/>
     </http>

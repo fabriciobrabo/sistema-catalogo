@@ -7,6 +7,7 @@ package br.fcb.venda.rn;
 
 import br.fcb.venda.dao.GenericDAO;
 import br.fcb.venda.entidade.Revendedor;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,9 +49,30 @@ public class RevendedorRN implements InterfaceRN<Revendedor> {
     public boolean remover(Revendedor o) {
         return dao.excluir(o);
     }
-    
+
     public List<Revendedor> obterTodosOrdenado() {
         return dao.obterTodosOrdenado(Revendedor.class, "nome");
+    }
+
+    public List<Revendedor> autoCompleteRevendedor(String busca) {
+        if (busca == null || busca.length() < 3) {
+            return null;
+        } else {
+            List<Revendedor> resposta = new ArrayList<Revendedor>();
+            for (Revendedor revendedor : obterTodos()) {
+                if (!(revendedor.getNome() + revendedor.getSobrenome()).toUpperCase().contains(busca.toUpperCase())) {
+                    //Não encontrou pelo nome do produto, então tenta pelo cpf
+                    if (revendedor.getCpf().toUpperCase().contains(busca.toUpperCase())) {
+                        resposta.add(revendedor);
+                        break;
+                    }
+                } else {
+                    //Encontrou pelo nome, então adiciona
+                    resposta.add(revendedor);
+                }
+            }
+            return resposta;
+        }
     }
 
 }

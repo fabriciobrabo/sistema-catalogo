@@ -7,6 +7,10 @@
         <h:form id="menuPrincipal">
             <p:tieredMenu>
                 <p:submenu label="Cadastros">
+                    <p:menuitem 
+                        value="Cadastrar Pedido" 
+                        ajax="false" 
+                        url="/sistema/pedido/realizarPedido.xhtml" />
                     <p:submenu label="Cadastrar Colaborador" icon="ui-icon-contact">
                         <p:menuitem 
                             value="Cadastrar Parceiro" 
@@ -25,7 +29,7 @@
                             ajax="false"
                             url="/sistema/colaboradores/revendedor/cadastrar.xhtml" />
                     </p:submenu>
-                    <p:menuitem 
+                    <p:menuitem
                         value="Cadastrar Catálogo" 
                         ajax="false" 
                         url="/sistema/catalogo/cadastrar.xhtml" />
