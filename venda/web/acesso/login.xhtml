@@ -5,27 +5,22 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/templateLogin.xhtml">
-
         <ui:define name="content">  
-
             <form 
                 action="#{request.contextPath}/j_spring_security_check" 
                 method="post">
-                <h:panelGroup 
+                <h:form 
                     rendered="#{!empty param.error}">
                     <span style="color: red">  
                         Erro ao efetuar o login
                     </span>
                     <br/>
-                </h:panelGroup>
-
+                </h:form>
                 <div align="center">
-
                     <p:messages 
                         id="mLogin" 
                         showDetail="true" 
                         showSummary="true"/>
-
                     <p:panel 
                         id="panelLogin"
                         header="Bem vindo(a) ao Acesso."
@@ -40,9 +35,7 @@
 
 
                         </h:panelGrid>
-
                         <p:panel style="border-color: transparent; color: transparent; background: transparent " >
-
                             <div align="center">
                                 <h:commandButton
                                     value="Entrar" />
@@ -51,19 +44,16 @@
                     </p:panel>
                 </div>
             </form>
-
             <h:form>
                 <div align="center">
                     <p:commandLink 
                         value="Criar Cadastro?" 
                         ajax="false" 
-                        action="/login/recuperar_senha.jsf"/>
+                        action="/acesso/recuperar_senha.jsf"/>
                 </div>
                 <br/>
             </h:form>
-
             <br/>
         </ui:define>
-
     </ui:composition>
 </html>
