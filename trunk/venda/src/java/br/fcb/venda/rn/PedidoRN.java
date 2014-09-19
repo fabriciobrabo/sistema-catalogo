@@ -6,6 +6,7 @@
 package br.fcb.venda.rn;
 
 import br.fcb.venda.dao.GenericDAO;
+import br.fcb.venda.entidade.ItemPedido;
 import br.fcb.venda.entidade.Pedido;
 import java.util.List;
 
@@ -52,6 +53,25 @@ public class PedidoRN implements InterfaceRN<Pedido> {
     @Override
     public boolean remover(Pedido o) {
         return dao.excluir(o);
+    }
+    
+    public void removerProdutoLista(Pedido pedido, ItemPedido itemPedido){
+        Integer indexRemover = null;
+        ItemPedido temp;
+        
+        if (itemPedido != null) {
+            for (int i = 0; i < pedido.getItemPedidoList().size(); i++) {
+                temp = pedido.getItemPedidoList().get(i);
+                if (itemPedido.getProduto().equals(temp.getProduto())
+                        && itemPedido.getQuantidade().equals(temp.getQuantidade())) {
+                    indexRemover = i;
+                    break;
+                }
+            }
+            if (indexRemover != null) {
+                pedido.getItemPedidoList().remove(indexRemover.intValue());
+            }
+        }
     }
 
 }

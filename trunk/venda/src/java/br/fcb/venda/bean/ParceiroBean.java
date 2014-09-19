@@ -75,6 +75,10 @@ public class ParceiroBean {
         }
     }
 
+    public List<Parceiro> autoCompleteParceiro(String busca) {
+        return rn_parceiro.autoCompleteParceiro(busca);
+    }
+
     public String adicionarNovo() {
         return "";
     }

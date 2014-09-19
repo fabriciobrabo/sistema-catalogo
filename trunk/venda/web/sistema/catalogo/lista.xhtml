@@ -24,6 +24,21 @@
                     <p:column headerText="Nome">
                         <h:outputText value="#{dtCatalogo.nome}"/>
                     </p:column>
+                    <p:column headerText="Fabricante">
+                        <h:outputText value="#{dtCatalogo.fabricante}"/>
+                    </p:column>
+                    <p:column headerText="Fornecedor">
+                        <h:outputText value="#{dtCatalogo.fornecedor}"/>
+                    </p:column>
+                    <p:column headerText="% Rev.">
+                        <h:outputText value="#{dtCatalogo.percentRevendedor}%"/>
+                    </p:column>
+                    <p:column headerText="% Mon.">
+                        <h:outputText value="#{dtCatalogo.percentMonitor}%"/>
+                    </p:column>
+                    <p:column headerText="% Rep.">
+                        <h:outputText value="#{dtCatalogo.percentRepresentante}%"/>
+                    </p:column>
                     <p:column headerText="Ações">
                         <p:commandButton 
                             icon="ui-icon-wrench"

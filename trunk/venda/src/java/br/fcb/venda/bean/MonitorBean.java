@@ -24,7 +24,6 @@ public class MonitorBean {
 
     private Monitor monitor = new Monitor();
     private final MonitorRN rn_monitor = new MonitorRN();
-    private final RepresentanteRN rn_representante = new RepresentanteRN();
     private List<Monitor> listaMonitores;
 
     public Monitor getMonitor() {
@@ -78,8 +77,8 @@ public class MonitorBean {
         }
     }
 
-    public List<Representante> autoCompleteRepresentante(String busca) {
-        return rn_representante.autoCompleteRepresentante(busca);
+    public List<Monitor> autoCompleteMonitor(String busca) {
+        return rn_monitor.autoCompleteMonitor(busca);
     }
 
     public String adicionarNovo() {
