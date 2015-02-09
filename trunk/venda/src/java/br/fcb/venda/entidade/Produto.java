@@ -9,6 +9,7 @@ package br.fcb.venda.entidade;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -57,7 +58,7 @@ public class Produto implements Serializable {
     @Column(name = "catalogo")
     private Integer catalogo;
     
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itemPedidoList;
 
     public Produto() {

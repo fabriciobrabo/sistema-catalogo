@@ -88,7 +88,7 @@ public class Representante implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "representante", orphanRemoval = true)
     private List<Monitor> monitorList;
 
-    @OneToMany(mappedBy = "representante")
+    @OneToMany(mappedBy = "representante", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidoList;
 
     @JoinColumn(name = "parceiro", referencedColumnName = "id")

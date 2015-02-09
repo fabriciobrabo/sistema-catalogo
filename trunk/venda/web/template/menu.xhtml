@@ -10,54 +10,58 @@
                     <p:menuitem 
                         value="Cadastrar Pedido" 
                         ajax="false" 
-                        url="/sistema/pedido/realizarPedido.xhtml" />
+                        outcome="/sistema/pedido/realizarPedido.xhtml" />
                     <p:submenu label="Cadastrar Colaborador" icon="ui-icon-contact">
                         <p:menuitem 
                             value="Cadastrar Parceiro" 
                             ajax="false"
-                            url="/sistema/colaboradores/parceiro/cadastrar.xhtml" />
+                            outcome="/sistema/colaboradores/parceiro/cadastrar.xhtml" />
                         <p:menuitem 
                             value="Cadastrar Representante" 
                             ajax="false"
-                            url="/sistema/colaboradores/representante/cadastrar.xhtml" />
+                            outcome="/sistema/colaboradores/representante/cadastrar.xhtml" />
                         <p:menuitem 
                             value="Cadastrar Monitor" 
                             ajax="false"
-                            url="/sistema/colaboradores/monitor/cadastrar.xhtml" />
+                            outcome="/sistema/colaboradores/monitor/cadastrar.xhtml" />
                         <p:menuitem 
                             value="Cadastrar Revendedor" 
                             ajax="false"
-                            url="/sistema/colaboradores/revendedor/cadastrar.xhtml" />
+                            outcome="/sistema/colaboradores/revendedor/cadastrar.xhtml" />
                     </p:submenu>
                     <p:menuitem
                         value="Cadastrar Catálogo" 
                         ajax="false" 
-                        url="/sistema/catalogo/cadastrar.xhtml" />
+                        outcome="/sistema/catalogo/cadastrar.xhtml" />
                     <p:menuitem 
                         value="Cadastrar Usuário" 
                         ajax="false"
-                        url="/sistema/inicio.xhtml" />
+                        outcome="/sistema/inicio.xhtml" />
                 </p:submenu>
                 <p:submenu label="Gerenciamento">
                     <p:submenu label="Gerenciar Colaboradores">
                         <p:menuitem 
                             value="Ver Parceiros" 
                             ajax="false"
-                            url="/sistema/colaboradores/parceiro/lista.xhtml" />
+                            outcome="/sistema/colaboradores/parceiro/lista.xhtml" />
                         <p:menuitem 
                             value="Ver Representantes" 
                             ajax="false"
-                            url="/sistema/colaboradores/representante/lista.xhtml" />
+                            outcome="/sistema/colaboradores/representante/lista.xhtml" />
                         <p:menuitem 
                             value="Ver Monitores" 
                             ajax="false"
-                            url="/sistema/colaboradores/monitor/lista.xhtml" />
+                            outcome="/sistema/colaboradores/monitor/lista.xhtml" />
                         <p:menuitem 
                             value="Ver Revendedores" 
                             ajax="false"
-                            url="/sistema/colaboradores/revendedor/lista.xhtml" />
+                            outcome="/sistema/colaboradores/revendedor/lista.xhtml" />
                     </p:submenu>
                 </p:submenu>
+                <p:menuitem id="mi_sair"
+                            value="Sair"
+                            icon="ui-icon-power"
+                            onclick="document.location = '#{request.contextPath}/j_spring_security_logout'" ></p:menuitem>
             </p:tieredMenu>
         </h:form>
     </h:body>
