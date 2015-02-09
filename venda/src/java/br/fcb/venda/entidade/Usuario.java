@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.fcb.venda.entidade;
 
 import br.fcb.venda.entidade.Representante;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,38 +40,39 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
     @NamedQuery(name = "Usuario.findByPerfil", query = "SELECT u FROM Usuario u WHERE u.perfil = :perfil")})
 public class Usuario implements Serializable {
-    
-    @OneToMany(mappedBy = "usuario")
-    private List<Parceiro> parceiroList;
-    
-    @OneToMany(mappedBy = "usuario")
-    private List<Monitor> monitorList;
-    
-    @OneToMany(mappedBy = "usuario")
-    private List<Revendedor> revendedorList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venda_sequence_usuario")
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "username")
     private String username;
-    
+
     @Column(name = "email")
     private String email;
-    
+
     @Column(name = "email_alternativo")
     private String emailAlternativo;
-    
+
     @Column(name = "senha")
     private String senha;
-    
+
     @Column(name = "perfil")
     private String perfil;
-    
-    @OneToMany(mappedBy = "usuario")
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Representante> representanteList;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Parceiro> parceiroList;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Monitor> monitorList;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Revendedor> revendedorList;
 
     public Usuario() {
     }
@@ -197,5 +198,5 @@ public class Usuario implements Serializable {
     public void setRevendedorList(List<Revendedor> revendedorList) {
         this.revendedorList = revendedorList;
     }
-    
+
 }

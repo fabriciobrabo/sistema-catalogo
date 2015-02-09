@@ -8,12 +8,13 @@
 	http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 	 
     <http auto-config="true">
-        <intercept-url pattern="/sistema/inicio.xhtml" access="ROLE_MASTER" />
+        <intercept-url pattern="/sistema/inicio.xhtml" access="" />
         <form-login 
             login-page="/acesso/login.xhtml" 
-            authentication-failure-url="/acesso/login.xhtml?erro=true"
+            authentication-failure-url="/acesso/login.xhtml?error=true"
             always-use-default-target = "true" 
             default-target-url = "/sistema/inicio.xhtml"/>
+        <logout/>
     </http>
     
     <authentication-manager>

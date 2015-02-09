@@ -7,15 +7,12 @@ package br.fcb.venda.bean;
 
 import br.fcb.venda.entidade.ItemPedido;
 import br.fcb.venda.entidade.Pedido;
-import br.fcb.venda.entidade.Produto;
 import br.fcb.venda.rn.PedidoRN;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
-import org.primefaces.util.ComponentUtils;
 
 /**
  *
@@ -59,10 +56,9 @@ public class PedidoBean {
         pedido.getItemPedidoList().add(itemPedido);
         itemPedido = new ItemPedido();
     }
-    
-    public void removerProdutoLista(){
+
+    public void removerProdutoLista() {
         rn_pedido.removerProdutoLista(pedido, itemPedido);
     }
-    
-    
+
 }

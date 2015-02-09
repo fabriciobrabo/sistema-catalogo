@@ -4,7 +4,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>
@@ -48,14 +47,7 @@
                         sticky="false"
                         autoUpdate="true"
                         />
-                    <ui:insert name="conteudoCentro">
-                        <div id="divConteudoCentro">
-                            <h:outputStylesheet 
-                                library="css"
-                                name="cssLayoutConteudoCentro.css"/>
-                        Content
-                        </div>
-                    </ui:insert>
+                    <ui:insert name="conteudoCentro"/>
 
                 </h:form>
             </p:layoutUnit>

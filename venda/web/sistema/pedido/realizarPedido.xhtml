@@ -25,7 +25,7 @@
                             converter="revendedorConversor"
                             completeMethod="#{revendedorBean.autoCompleteRevendedor}"
                             var="revendedor"
-                            itemLabel="#{revendedor.nome}"
+                            itemLabel="#{revendedor}"
                             itemValue="#{revendedor}"
                             >
                             <p:ajax
@@ -61,11 +61,13 @@
                         <p:outputLabel
                             value="Selecionar Produto"/>
                         <p:autoComplete
+                            required="true"
+                            requiredMessage="Campo obrigatório, selecionar o produto."
                             completeMethod="#{produtoBean.autoCompleteProduto}"
                             value="#{pedidoBean.itemPedido.produto}"
                             var="produto"
                             converter="produtoConversor"
-                            itemLabel="#{produto.nome}"
+                            itemLabel="#{produto}"
                             itemValue="#{produto}">
                             <p:column
                                 headerText="Codigo">
